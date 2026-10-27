@@ -21,3 +21,17 @@ $('#search').oninput=render;
 $('#reset').onclick=()=>{if(confirm('¿Iniciar nuevo conteo? Primero exporta el actual. Esto borra las cantidades, pero conserva tus presentaciones configuradas.')){state={};save();render();}};
 $('#export').onclick=()=>{const q=v=>'"'+String(v).replaceAll('"','""')+'"';const rows=[['Producto','Presentación','Unidades por paquete','Paquetes','Sixpacks','Unidades sueltas','Total unidades']];for(const [id,d] of Object.entries(state)){const pos=id.lastIndexOf('|');if(pos<0)continue;const name=id.slice(0,pos),size=id.slice(pos+1),cap=caps[size];rows.push([name,size,cap??'Sin confirmar',d.packs||0,d.six||0,d.loose||0,(cap||0)*(d.packs||0)+6*(d.six||0)+(d.loose||0)]);}const csv='\ufeff'+rows.map(r=>r.map(q).join(';')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='inventariogo-'+new Date().toISOString().slice(0,10)+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 render();
+
+// Copias JSON completas: a diferencia del CSV, se pueden importar para recuperar el trabajo.
+window.inventarioGoBackup=()=>({formatVersion:1,exportedAt:new Date().toISOString(),state:JSON.parse(JSON.stringify(state)),config:JSON.parse(JSON.stringify(config))});
+window.inventarioGoRestore=backup=>{
+ if(!backup||backup.formatVersion!==1||!backup.state||!backup.config||Array.isArray(backup.state)||Array.isArray(backup.config)||typeof backup.state!=='object'||typeof backup.config!=='object')throw new Error('Formato de respaldo inválido');
+ state=backup.state;config=backup.config;save();render();
+};
+document.querySelector('#export-json').onclick=()=>{
+ const data=JSON.stringify(window.inventarioGoBackup(),null,2);const url=URL.createObjectURL(new Blob([data],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='inventariogo-respaldo-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+document.querySelector('#import-json').onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{const data=JSON.parse(await file.text());if(!confirm('¿REEMPLAZAR los conteos y tamaños actuales con este respaldo JSON? Antes exporta el inventario actual.'))return;window.inventarioGoRestore(data);alert('Respaldo importado correctamente.');}catch(err){alert('No se pudo importar: '+err.message)}finally{e.target.value=''}
+};

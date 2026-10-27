@@ -1,15 +1,13 @@
-InventarioGo v5 - PWA instalable en iPhone
+InventarioGo v6 - Firebase con copias manuales
 
-1. Respalda los conteos desde la v4 con Exportar CSV.
-2. Publica el CONTENIDO de la carpeta InventarioGo en un sitio HTTPS (por ejemplo GitHub Pages).
-3. Abre el enlace HTTPS en Safari en el iPhone.
-4. Compartir > Agregar a pantalla de inicio > Agregar.
-5. Abre la app instalada al menos una vez con internet; luego prueba sin conexión.
+1. ANTES de actualizar: en v5 exporta CSV desde iPhone. No borres Safari ni la app.
+2. Abre firebase-config.js y reemplaza cada REEMPLAZAR con los valores exactos de tu app web Firebase. No publiques credenciales privadas ni contraseñas.
+3. Comprueba que Firestore permita a tu usuario autenticado leer/escribir /usuarios/{uid}/inventarios/{id}.
+4. Sube TODOS los archivos a la RAIZ del repositorio de GitHub Pages, reemplazando los anteriores.
+5. Espera a que GitHub Pages publique; cierra y vuelve a abrir InventarioGo en Safari/iPhone. Si ves v5, espera y vuelve a abrir. La app instalada y Safari pueden usar almacenamientos distintos: comprueba el conteo antes de actualizar.
+6. En el iPhone, antes de recuperar cualquier copia, pulsa Exportar respaldo JSON.
+7. Inicia sesión con tu correo/contraseña de Firebase Authentication.
+8. Pulsa Guardar copia en Firebase DESDE EL DISPOSITIVO QUE TENGA EL INVENTARIO CORRECTO.
+9. En otro dispositivo, inicia sesión y pulsa Recuperar copia de Firebase, tras respaldar su contenido.
 
-AVISOS:
-- Los datos se guardan en localStorage por navegador/dispositivo y NO se sincronizan entre computadora y iPhone.
-- El CSV es respaldo de consulta, NO un archivo importable en esta versión.
-- Si cambias de URL/origen, los datos no se transfieren automáticamente.
-- No borres los datos de Safari ni desinstales la app sin respaldo.
-- Abrir index.html directamente como archivo local NO activa el modo offline instalable; requiere HTTPS o localhost.
-- Para multiusuario y sincronización se necesitará una fase posterior con autenticación y base de datos.
+IMPORTANTE: No es sincronización automática ni multiusuario compartido. Los cambios no se suben solos. Si guardas una copia desde otro dispositivo, reemplaza la copia anterior de la nube. No uses el botón Guardar desde un inventario vacío. Los datos locales permanecen disponibles sin internet, pero Firebase necesita conexión. El CSV no es importable; el JSON sí. La copia local depende del origen y del almacenamiento del navegador. Evita borrar los datos de la app. GitHub Pages público expone el código y la configuración web de Firebase (esto es normal); la protección depende de Authentication y reglas Firestore.
