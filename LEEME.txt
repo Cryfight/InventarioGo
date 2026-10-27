@@ -1,0 +1,15 @@
+InventarioGo v5 - PWA instalable en iPhone
+
+1. Respalda los conteos desde la v4 con Exportar CSV.
+2. Publica el CONTENIDO de la carpeta InventarioGo en un sitio HTTPS (por ejemplo GitHub Pages).
+3. Abre el enlace HTTPS en Safari en el iPhone.
+4. Compartir > Agregar a pantalla de inicio > Agregar.
+5. Abre la app instalada al menos una vez con internet; luego prueba sin conexión.
+
+AVISOS:
+- Los datos se guardan en localStorage por navegador/dispositivo y NO se sincronizan entre computadora y iPhone.
+- El CSV es respaldo de consulta, NO un archivo importable en esta versión.
+- Si cambias de URL/origen, los datos no se transfieren automáticamente.
+- No borres los datos de Safari ni desinstales la app sin respaldo.
+- Abrir index.html directamente como archivo local NO activa el modo offline instalable; requiere HTTPS o localhost.
+- Para multiusuario y sincronización se necesitará una fase posterior con autenticación y base de datos.
