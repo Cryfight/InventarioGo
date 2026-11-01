@@ -1,19 +1,24 @@
-InventarioGo v8 — Historial de conteos
+InventarioGo v9.1 — lector de códigos de barras para iPhone
 
-1. Antes de actualizar, exporta un JSON en el iPhone y en la computadora.
-2. Conserva tu firebase-config.js de v7; el ZIP trae un ejemplo, no tus claves.
-3. Sube los archivos a GitHub Pages. No desinstales la PWA ni borres datos.
-4. Guarda un conteo en Historial o pulsa Cerrar e iniciar conteo (archiva el actual).
-5. Verifica que el historial aparezca en Firebase y en otro dispositivo tras sincronizar.
+CAMBIOS:
+- Lector ZXing por cámara (no depende de BarcodeDetector).
+- Escaneo continuo activado por defecto; desactívalo para detener al encontrar un código.
+- Botón de linterna; solo funciona si el navegador expone la capacidad torch.
+- Búsqueda manual por EAN/UPC numérico de 8 a 14 dígitos.
+- Vinculación de código a bebida/presentación y búsqueda posterior.
+- Conserva conteos, historial, respaldo JSON y Firebase del proyecto anterior.
 
-Nota: si ambos dispositivos modifican simultaneamente el inventario, la sincronizacion v7 se pausa. Evita reemplazar copias sin respaldo.
-No uses el boton de copia manual para sobrescribir cambios de otro dispositivo.
+INSTALACIÓN:
+1. Conserva una copia del ZIP anterior y exporta un respaldo JSON.
+2. Copia tu firebase-config.js REAL de v9 a esta carpeta (el incluido es de ejemplo).
+3. Sube TODOS los archivos de esta carpeta a la raíz de tu repositorio GitHub Pages.
+4. Abre el enlace HTTPS en Safari y espera a que se actualice a v9.1.
+5. Con internet, abre la cámara y concede permiso. ZXing se carga desde un CDN.
 
-
-V9 - lector de códigos:
-- Cámara con BarcodeDetector cuando Safari/iOS lo permita; si no, ingreso manual.
-- Vincular un código EAN/UPC con producto y presentación, sin cambiar conteos.
-- Los vínculos forman parte del respaldo JSON y de la copia Firebase.
-- Antes de publicar: exportar JSON desde v8 y guardar copia de firebase-config.js.
-- IMPORTANTE: usar la misma URL de GitHub Pages, no borrar la app.
-- No se garantiza compatibilidad del escáner por cámara en todas las versiones de Safari.
+IMPORTANTE:
+- La cámara requiere HTTPS y permiso de cámara.
+- El lector depende de un script CDN: la primera carga del lector necesita internet y puede no funcionar sin conexión.
+- La linterna depende del soporte del navegador; iOS puede no permitirla.
+- No se han realizado pruebas físicas en iPhone XS; probar antes de usar en producción.
+- Si aparece v9, cierra y vuelve a abrir la PWA, o recarga Safari tras desplegar.
+- Escanear no modifica automáticamente el conteo.
