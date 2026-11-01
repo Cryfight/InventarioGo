@@ -1,13 +1,19 @@
-InventarioGo v6 - Firebase con copias manuales
+InventarioGo v8 — Historial de conteos
 
-1. ANTES de actualizar: en v5 exporta CSV desde iPhone. No borres Safari ni la app.
-2. Abre firebase-config.js y reemplaza cada REEMPLAZAR con los valores exactos de tu app web Firebase. No publiques credenciales privadas ni contraseñas.
-3. Comprueba que Firestore permita a tu usuario autenticado leer/escribir /usuarios/{uid}/inventarios/{id}.
-4. Sube TODOS los archivos a la RAIZ del repositorio de GitHub Pages, reemplazando los anteriores.
-5. Espera a que GitHub Pages publique; cierra y vuelve a abrir InventarioGo en Safari/iPhone. Si ves v5, espera y vuelve a abrir. La app instalada y Safari pueden usar almacenamientos distintos: comprueba el conteo antes de actualizar.
-6. En el iPhone, antes de recuperar cualquier copia, pulsa Exportar respaldo JSON.
-7. Inicia sesión con tu correo/contraseña de Firebase Authentication.
-8. Pulsa Guardar copia en Firebase DESDE EL DISPOSITIVO QUE TENGA EL INVENTARIO CORRECTO.
-9. En otro dispositivo, inicia sesión y pulsa Recuperar copia de Firebase, tras respaldar su contenido.
+1. Antes de actualizar, exporta un JSON en el iPhone y en la computadora.
+2. Conserva tu firebase-config.js de v7; el ZIP trae un ejemplo, no tus claves.
+3. Sube los archivos a GitHub Pages. No desinstales la PWA ni borres datos.
+4. Guarda un conteo en Historial o pulsa Cerrar e iniciar conteo (archiva el actual).
+5. Verifica que el historial aparezca en Firebase y en otro dispositivo tras sincronizar.
 
-IMPORTANTE: No es sincronización automática ni multiusuario compartido. Los cambios no se suben solos. Si guardas una copia desde otro dispositivo, reemplaza la copia anterior de la nube. No uses el botón Guardar desde un inventario vacío. Los datos locales permanecen disponibles sin internet, pero Firebase necesita conexión. El CSV no es importable; el JSON sí. La copia local depende del origen y del almacenamiento del navegador. Evita borrar los datos de la app. GitHub Pages público expone el código y la configuración web de Firebase (esto es normal); la protección depende de Authentication y reglas Firestore.
+Nota: si ambos dispositivos modifican simultaneamente el inventario, la sincronizacion v7 se pausa. Evita reemplazar copias sin respaldo.
+No uses el boton de copia manual para sobrescribir cambios de otro dispositivo.
+
+
+V9 - lector de códigos:
+- Cámara con BarcodeDetector cuando Safari/iOS lo permita; si no, ingreso manual.
+- Vincular un código EAN/UPC con producto y presentación, sin cambiar conteos.
+- Los vínculos forman parte del respaldo JSON y de la copia Firebase.
+- Antes de publicar: exportar JSON desde v8 y guardar copia de firebase-config.js.
+- IMPORTANTE: usar la misma URL de GitHub Pages, no borrar la app.
+- No se garantiza compatibilidad del escáner por cámara en todas las versiones de Safari.
