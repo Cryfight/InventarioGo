@@ -1,7 +1,27 @@
-InventarioGo v9.2 - Modo de escaneo rápido
+InventarioGo v9.3 — actualización desde v9.2
 
-Al leer un código vinculado, se muestra únicamente el producto y su presentación. En su tarjeta aparece el botón verde Escanear siguiente producto, que abre nuevamente la cámara sin buscar el botón superior. La cámara se pausa al reconocer un producto para que puedas contar sin interrupciones. Ver todos regresa al listado completo.
+NOVEDADES
+- Pantalla de inicio de sesión obligatoria con Firebase Authentication.
+- Recuperación de contraseña por correo.
+- Categorías Refrescos y Cervecería, con botón Agregar producto.
+- Fecha de vencimiento por producto y presentación (una fecha por presentación; lotes múltiples quedan para una versión posterior).
+- Se mantiene el lector ZXing, linterna (si iOS lo permite), escaneo continuo, búsqueda manual y Escanear siguiente producto.
+- Códigos, nuevos productos y fechas de vencimiento incluidos en JSON y en la copia de Firestore.
 
-IMPORTANTE: Antes de actualizar exporta JSON y conserva firebase-config.js de tu instalación previa. Sube todos los archivos a GitHub Pages, incluido sw.js, para renovar la caché. No desinstales la app ni borres datos del navegador.
+ANTES DE ACTUALIZAR
+1. Exporta un JSON de v9.2 y guárdalo.
+2. Copia TU firebase-config.js a esta carpeta. Nunca compartas contraseñas ni claves de servicio.
+3. Sube los archivos de esta carpeta al mismo repositorio y ruta de GitHub Pages.
+4. Espera la actualización; puede requerir cerrar y volver a abrir la app instalada.
+5. Si el login da error auth/unauthorized-domain, agrega tu dominio de GitHub Pages en Firebase Authentication > Settings > Authorized domains (solo el hostname, sin ruta).
+6. Si olvidaste la contraseña, escribe tu correo en el inicio y toca ¿Olvidaste tu contraseña?; revisa spam.
 
-El código nuevo sigue permitiendo vincular producto y tamaño. El escaneo no incrementa conteos automáticamente. La linterna depende de Safari.
+SINCRONIZACIÓN
+La versión mantiene el mecanismo de sincronización v7: iniciar sesión NO basta para enviar cambios a Firestore. Debes recuperar la copia correcta y activar Sincronización automática, o usar Guardar copia manual en Firebase. Los cambios se guardan localmente primero. El estado de sincronización aparece en Copias y cuenta.
+
+LIMITACIONES
+- Una fecha de vencimiento por producto+presentación, no por lote individual.
+- No hay registro público de usuarios: se crean en Firebase Authentication.
+- La sincronización del inventario completo puede detectar conflictos entre dispositivos y pausarse; no fusiona cambios simultáneos.
+- La app necesita conexión para autenticarse al menos inicialmente y cargar ZXing; el funcionamiento totalmente offline no está garantizado.
+- La configuración Firebase web identifica el proyecto, las reglas de Firestore protegen los datos.

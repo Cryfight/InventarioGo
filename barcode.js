@@ -11,7 +11,7 @@ function show(code,fromCamera=false){current=code;$('#barcode-input').value=code
 if(fromCamera&&navigator.vibrate)navigator.vibrate(80);
 if(fromCamera&&!continuous)stop();}
 function find(){const code=clean($('#barcode-input').value);if(!valid(code)){status('Introduce un código numérico de 8 a 14 dígitos.');return;}show(code);}
-const select=$('#barcode-product');for(const name of api.names){const o=document.createElement('option');o.value=name;o.textContent=name;select.append(o);}select.onchange=fillSizes;fillSizes();
+const select=$('#barcode-product');function fillProducts(){const prior=select.value;select.replaceChildren();for(const name of api.names){const o=document.createElement('option');o.value=name;o.textContent=name;select.append(o);}if(api.names.includes(prior))select.value=prior;fillSizes();}window.addEventListener('inventariogo:products',fillProducts);select.onchange=fillSizes;fillProducts();
 $('#barcode-find').onclick=find;$('#barcode-input').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();find();}});
 $('#barcode-save').onclick=()=>{const name=select.value,size=$('#barcode-size').value;if(!current||!name||!size)return;api.link(current,name,size);show(current);status('Código vinculado. Puedes continuar escaneando.');};
 $('#barcode-unlink').onclick=()=>{if(!current||!confirm('¿Desvincular este código? No se borrarán conteos.'))return;api.unlink(current);show(current);};
