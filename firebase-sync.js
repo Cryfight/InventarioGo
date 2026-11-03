@@ -7,11 +7,33 @@ const say=s=>{status.textContent=s};
 const ready=Object.values(firebaseConfig).every(v=>v && v!=='REEMPLAZAR');
 const gate=$('#auth-gate'),appContent=$('#app-content'),gateStatus=$('#gate-status');
 function gateMessage(m){gateStatus.textContent=m;}
-if(!ready)gateMessage('Falta configurar Firebase. Abre firebase-config.js y agrega tu configuración.');
+if(!ready)gateMessage('Falta configurar Firebase. Copia tu firebase-config.js funcional de la versión anterior. La recuperación de contraseña requiere esa conexión.');
 if(!ready){say('Completa firebase-config.js. Los conteos locales siguen disponibles.');}
 else {
  try {
  const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+ const forgot=$('#forgot-password');
+ forgot.addEventListener('click',async()=>{
+   const field=$('#gate-email');
+   const email=field.value.trim();
+   if(!email){gateMessage('Escribe primero el correo de tu cuenta y vuelve a tocar «¿Olvidaste tu contraseña?».');field.focus();return;}
+   if(!field.checkValidity()){gateMessage('Escribe una dirección de correo válida.');field.focus();return;}
+   forgot.disabled=true;
+   gateMessage('Solicitando correo de recuperación...');
+   try{
+     await sendPasswordResetEmail(auth,email);
+     gateMessage('Solicitud enviada. Si el correo corresponde a una cuenta, revisa la bandeja de entrada y spam.');
+   }catch(err){
+     const messages={
+       'auth/invalid-email':'El correo electrónico no es válido.',
+       'auth/too-many-requests':'Demasiados intentos. Espera unos minutos e inténtalo nuevamente.',
+       'auth/network-request-failed':'No hay conexión con Firebase. Revisa internet.',
+       'auth/unauthorized-domain':'El dominio de esta página no está autorizado en Firebase Authentication.',
+       'auth/operation-not-allowed':'La recuperación por correo no está habilitada en Firebase Authentication.'
+     };
+     gateMessage((messages[err.code]||'No se pudo enviar la solicitud.')+' ('+(err.code||err.message)+')');
+   }finally{forgot.disabled=false;}
+ });
 setPersistence(auth,browserLocalPersistence).catch(err=>gateMessage('No se pudo conservar la sesión: '+err.code));
  let user=null,enabled=false,revision=null,busy=false,pending=false,timer=null;
  const marker=uid=>'inventariogo-sync-v7-'+uid;
@@ -43,7 +65,7 @@ setPersistence(auth,browserLocalPersistence).catch(err=>gateMessage('No se pudo 
   say(u?'Sesión iniciada. Recupera la copia de Firebase antes de activar la sincronización.':'Inicia sesión para usar Firebase.');
  });
  $('#gate-login').addEventListener('submit',async e=>{e.preventDefault();const btn=$('#gate-submit');btn.disabled=true;gateMessage('Iniciando sesión...');try{await signInWithEmailAndPassword(auth,$('#gate-email').value.trim(),$('#gate-password').value);$('#gate-password').value='';}catch(err){gateMessage('No se pudo iniciar sesión ('+err.code+'). Verifica el correo, la contraseña y que el dominio esté autorizado.');}finally{btn.disabled=false;}});
-$('#forgot-password').onclick=async()=>{const email=$('#gate-email').value.trim()||prompt('Escribe el correo de tu cuenta Firebase:');if(!email)return;try{await sendPasswordResetEmail(auth,email);gateMessage('Si el correo corresponde a una cuenta válida, recibirás instrucciones para restablecer la contraseña. Revisa también spam.');}catch(err){gateMessage('No se pudo solicitar el cambio: '+err.code);}};
+
 $('#login-form').addEventListener('submit',async e=>{e.preventDefault();const b=$('#login-button');b.disabled=true;say('Iniciando sesión...');try{await signInWithEmailAndPassword(auth,$('#email').value,$('#password').value);$('#password').value='';}catch(err){say('No se pudo iniciar sesión: '+err.code)}finally{b.disabled=false}});
  $('#logout').onclick=async()=>{pause();await signOut(auth)};
  $('#download-cloud').onclick=async()=>{if(!user)return;pause();try{say('Buscando copia...');const snap=await getDoc(ref());if(!snap.exists()){say('No hay copia en Firebase.');return;}const data=snap.data();if(!confirm('¿REEMPLAZAR los datos de ESTE dispositivo por la copia de Firebase? Exporta antes un JSON local.')){say('Recuperación cancelada.');return;}window.inventarioGoRestore(JSON.parse(data.backup));revision=Number(data.revision||0);say('Copia recuperada. Ya puedes activar la sincronización.');}catch(err){say('Error al recuperar: '+(err.code||err.message))}};

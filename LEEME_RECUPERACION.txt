@@ -1,0 +1,9 @@
+InventarioGo v9.3.1 — corrección de recuperación de contraseña
+
+1. Copia firebase-config.js FUNCIONAL de tu versión publicada. Este ZIP trae valores REEMPLAZAR como plantilla.
+2. Publica todos los archivos actualizados en GitHub Pages.
+3. Espera la publicación y recarga Safari (si ves versión antigua, cierra y vuelve a abrir la web).
+4. En la pantalla de acceso, escribe tu correo y toca ¿Olvidaste tu contraseña?
+5. Revisa correo y spam. La aplicación muestra errores si Firebase rechaza la solicitud.
+
+No compartas contraseñas ni claves de cuentas de servicio. No se modificaron las claves de almacenamiento local ni la lógica de inventarios.
