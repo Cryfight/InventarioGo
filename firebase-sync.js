@@ -12,28 +12,6 @@ if(!ready){say('Completa firebase-config.js. Los conteos locales siguen disponib
 else {
  try {
  const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
- const forgot=$('#forgot-password');
- forgot.addEventListener('click',async()=>{
-   const field=$('#gate-email');
-   const email=field.value.trim();
-   if(!email){gateMessage('Escribe primero el correo de tu cuenta y vuelve a tocar «¿Olvidaste tu contraseña?».');field.focus();return;}
-   if(!field.checkValidity()){gateMessage('Escribe una dirección de correo válida.');field.focus();return;}
-   forgot.disabled=true;
-   gateMessage('Solicitando correo de recuperación...');
-   try{
-     await sendPasswordResetEmail(auth,email);
-     gateMessage('Solicitud enviada. Si el correo corresponde a una cuenta, revisa la bandeja de entrada y spam.');
-   }catch(err){
-     const messages={
-       'auth/invalid-email':'El correo electrónico no es válido.',
-       'auth/too-many-requests':'Demasiados intentos. Espera unos minutos e inténtalo nuevamente.',
-       'auth/network-request-failed':'No hay conexión con Firebase. Revisa internet.',
-       'auth/unauthorized-domain':'El dominio de esta página no está autorizado en Firebase Authentication.',
-       'auth/operation-not-allowed':'La recuperación por correo no está habilitada en Firebase Authentication.'
-     };
-     gateMessage((messages[err.code]||'No se pudo enviar la solicitud.')+' ('+(err.code||err.message)+')');
-   }finally{forgot.disabled=false;}
- });
 setPersistence(auth,browserLocalPersistence).catch(err=>gateMessage('No se pudo conservar la sesión: '+err.code));
  let user=null,enabled=false,revision=null,busy=false,pending=false,timer=null;
  const marker=uid=>'inventariogo-sync-v7-'+uid;
