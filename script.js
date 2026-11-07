@@ -1,3 +1,4 @@
+const $=s=>document.querySelector(s);
 const names=['Pepsi','PEPSI CERO','Milori Toronja','Milori Mandarina','Milori Kolita','MIRINDA PIÑA','7UP','Zarza Mug','Evervess Gyn','Evervess Soda','Maxi Malta','Tropi Manzana','Tropi Mango','TROPI MELO CERO','Tropi Frutas','Tropi Melocotón','Tropi Limón','Tropi Té Blanco','TROPI BLANCO CERO','Tropi Té Verde','TROPI CERO FRUTAS','MAX ENERGY ORIG','MAX BOST MORA','X ENERGY STRAWBERRY','MAX APPLE KIWI','JET','JET CERO','JET KOLITA','JET MANGO','JET AM','Jugo Tomate CON Chile','Jugo Tomate SIN Chile','Jugo Tomate litro','Kerns Frutas','Kerns Manzana','Kerns Melocotón','Kerns Pera','KERNS BLANCO','Tampico','Agua','Vitaloe','Gatorade Rojo','Gatorade Azul','Gatorade Amarillo','Gatorade Naranja','Gatorade Uva','EVERVESS QUINADA','H2O Naranchelo','H2O Rosado','H2O Limón','Max Energy Sandía Bite','Max Energy Guaraná Fizz'];
 const sizes=['Vidrio','250 ml','350 ml','473 ml','500 ml','600 ml','1 litro','1.75 litros','2 litros','2.5 litros','3 litros'];
 const caps={'250 ml':12,'350 ml':12,'600 ml':12,'1 litro':12,'2.5 litros':6,'3 litros':6};
@@ -11,7 +12,7 @@ let config=load(CFG)||{};let history=load(HIST)||[];let barcodes=load(BARCODES)|
 function updateProductsVisibility(){const visible=productsExpanded||!!scannedFocus;$('#items').hidden=!visible;$('#toggle-products').textContent=productsExpanded?'📋 Ocultar lista completa de productos':'📋 Mostrar lista completa de productos';$('#toggle-products').setAttribute('aria-expanded',String(visible));$('#list-state').textContent=scannedFocus?'Mostrando solo el producto escaneado.':productsExpanded?'Lista completa visible.':'Lista oculta para mantener la pantalla ordenada.';}
 $('#toggle-products').onclick=()=>{if(scannedFocus){scannedFocus=null;$('#search').value='';}productsExpanded=!productsExpanded;render();};
 
-const $=s=>document.querySelector(s);
+
 function save(){localStorage.setItem(KEY,JSON.stringify(state));localStorage.setItem(CFG,JSON.stringify(config));localStorage.setItem(HIST,JSON.stringify(history));localStorage.setItem(BARCODES,JSON.stringify(barcodes));localStorage.setItem(EXTRAS,JSON.stringify(extraProducts));localStorage.setItem(EXPIRIES,JSON.stringify(expiries));window.dispatchEvent(new Event('inventariogo:changed'));}
 function get(id){return state[id]||{packs:0,six:0,loose:0,allowSix:false};}
 function set(id,patch){state[id]={...get(id),...patch};save();render();}
