@@ -12,3 +12,11 @@
 
 /* v9.3 */
 #app-content[hidden],#auth-gate[hidden]{display:none!important}.auth-gate{min-height:100dvh;display:grid;place-items:center;padding:22px;background:#0b1120}.auth-card{width:min(100%,440px);background:#17233a;border:1px solid #334155;padding:25px;border-radius:20px;color:#fff}.auth-card form{display:grid;gap:12px}.auth-card input,.auth-card button{width:100%;min-height:46px}.auth-card p{color:#cbd5e1}.auth-card .hint{font-size:12px}.category-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.category-tabs button{flex:1;min-width:120px}.category-tabs .active{background:#2563eb}.expiry-box{border-top:1px solid #334155;padding-top:12px;margin-top:12px}.expiry-box label{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.expiry-box input{max-width:190px}.expiry-box small{display:block;margin-top:6px;color:#fbbf24}#add-product-form{display:grid;gap:12px}#add-product-form input,#add-product-form select{min-height:44px}
+
+/* v9.4: lista plegable e historial editable */
+#items[hidden],#scan-focus-bar[hidden]{display:none!important}
+.list-toggle-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+.list-toggle-row button{flex:1;min-width:230px}
+.history-entry{display:flex;flex-wrap:wrap;gap:9px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(128,128,128,.2)}
+.history-entry strong{flex-basis:100%}
+.history-entry .history-delete{border-color:#a84646;color:#ef9292}

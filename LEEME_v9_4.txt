@@ -1,0 +1,9 @@
+InventarioGo v9.4
+
+Novedades: lista de productos plegada inicialmente, botón para mostrar/ocultar; borrar entradas individuales del historial con confirmación. Se mantiene el modo de escaneo enfocado.
+
+Antes de actualizar: exporta respaldo JSON y verifica Firebase. Copia firebase-config.js REAL desde tu instalación anterior (el incluido es ejemplo). Sube todos los archivos a GitHub Pages. No borres datos de Safari ni desinstales la PWA.
+
+Al eliminar un historial se guarda el cambio localmente y se notificará al módulo de sincronización. Si está activado, la eliminación se puede propagar a Firebase; otros dispositivos deben actualizar su copia antes de guardar. No existe papelera.
+
+La lista permanece oculta inicialmente, pero el escaneo de un código registrado muestra solo su producto. Buscar manualmente expande la lista.
