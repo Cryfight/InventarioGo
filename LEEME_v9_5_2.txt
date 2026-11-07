@@ -1,0 +1,4 @@
+InventarioGo v9.5.2
+Mejora: al reconocer un código vinculado, se detiene la cámara y se desplaza la pantalla hasta la tarjeta del producto, dejando visible su nombre y sus controles con margen superior aproximado del 12% de la pantalla.
+No cambia los datos, Firebase ni el comportamiento del botón Escanear siguiente.
+Antes de actualizar, exporta respaldo JSON y conserva firebase-config.js funcional.
