@@ -1,6 +1,6 @@
 const names=['Pepsi','PEPSI CERO','Milori Toronja','Milori Mandarina','Milori Kolita','MIRINDA PIÑA','7UP','Zarza Mug','Evervess Gyn','Evervess Soda','Maxi Malta','Tropi Manzana','Tropi Mango','TROPI MELO CERO','Tropi Frutas','Tropi Melocotón','Tropi Limón','Tropi Té Blanco','TROPI BLANCO CERO','Tropi Té Verde','TROPI CERO FRUTAS','MAX ENERGY ORIG','MAX BOST MORA','X ENERGY STRAWBERRY','MAX APPLE KIWI','JET','JET CERO','JET KOLITA','JET MANGO','JET AM','Jugo Tomate CON Chile','Jugo Tomate SIN Chile','Jugo Tomate litro','Kerns Frutas','Kerns Manzana','Kerns Melocotón','Kerns Pera','KERNS BLANCO','Tampico','Agua','Vitaloe','Gatorade Rojo','Gatorade Azul','Gatorade Amarillo','Gatorade Naranja','Gatorade Uva','EVERVESS QUINADA','H2O Naranchelo','H2O Rosado','H2O Limón','Max Energy Sandía Bite','Max Energy Guaraná Fizz'];
 const sizes=['Vidrio','250 ml','350 ml','473 ml','500 ml','600 ml','1 litro','1.75 litros','2 litros','2.5 litros','3 litros'];
-const caps={'250 ml':24,'350 ml':24,'600 ml':24,'1 litro':12,'2.5 litros':6,'3 litros':6};
+const caps={'250 ml':12,'350 ml':12,'600 ml':12,'1 litro':12,'2.5 litros':6,'3 litros':6};
 const EXTRAS='inventariogo-v93-products', EXPIRIES='inventariogo-v93-expiries';
 const KEY='inventariogo-v4', CFG='inventariogo-v4-sizes', HIST='inventariogo-v8-history', BARCODES='inventariogo-v9-barcodes';
 function load(k){try{return JSON.parse(localStorage.getItem(k)||'null')}catch{return null}}

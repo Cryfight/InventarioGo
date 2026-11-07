@@ -1,0 +1,9 @@
+InventarioGo v9.5 — corrección de unidades por paquete
+
+250 ml: 12, 350 ml: 12, 600 ml: 12, 1 litro: 12, 2.5 litros: 6, 3 litros: 6. SIX: 6.
+
+Antes de actualizar: exportar respaldo JSON y CSV, y verificar sincronización en Firebase.
+Copiar firebase-config.js funcional de la versión instalada; el ZIP incluye valores de ejemplo.
+Subir archivos al repositorio y esperar despliegue. No desinstalar ni borrar datos.
+
+ATENCIÓN: se conservan los números de paquetes, no los totales calculados previamente. Los totales históricos que se recalculen usando la nueva equivalencia pueden diferir de los originales. Guardar CSV previo para auditoría.
